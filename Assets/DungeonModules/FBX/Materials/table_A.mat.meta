@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d9af97afbf67b784fa6d747cab1ac26a
+timeCreated: 1513055938
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 108997
+  packageName: LowPoly Dungeon Modules
+  packageVersion: 1.0
+  assetPath: Assets/DungeonModules/FBX/Materials/table_A.mat
+  uploadId: 228414

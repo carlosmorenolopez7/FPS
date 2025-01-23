@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 29a092a99963baa4ea9cf8a5de412734
+timeCreated: 1512610953
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 108997
+  packageName: LowPoly Dungeon Modules
+  packageVersion: 1.0
+  assetPath: Assets/DungeonModules/Prefabs/torch_A2.prefab
+  uploadId: 228414

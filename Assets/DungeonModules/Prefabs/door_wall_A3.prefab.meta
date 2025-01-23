@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e193aeba793b2ed4da311c6a1f433691
+timeCreated: 1515375800
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 108997
+  packageName: LowPoly Dungeon Modules
+  packageVersion: 1.0
+  assetPath: Assets/DungeonModules/Prefabs/door_wall_A3.prefab
+  uploadId: 228414

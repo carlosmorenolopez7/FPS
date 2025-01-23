@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d91e4ebace06fac469a6db95fa8cb706
+timeCreated: 1512177495
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 108997
+  packageName: LowPoly Dungeon Modules
+  packageVersion: 1.0
+  assetPath: Assets/DungeonModules/FBX/Materials/ceiling_A.mat
+  uploadId: 228414
