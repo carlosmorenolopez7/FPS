@@ -11,14 +11,14 @@ public class ControlBala : MonoBehaviour
         Destroy(gameObject, 3f);
     }
 
-    /*private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Cubo"))
+        if (other.gameObject.CompareTag("enemy"))
         {
             audioSource.Play();
             StartCoroutine(Destruir(other.gameObject));
         }
-    }*/
+    }
 
     IEnumerator Destruir(GameObject other)
     {

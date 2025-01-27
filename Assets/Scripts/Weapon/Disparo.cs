@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Disparo : MonoBehaviour
 {
     private bool puedoDisparar = true;
-
 
     public float[] fuerzaDisparo;
     public float[] tiempoDisparo;
@@ -18,7 +16,6 @@ public class Disparo : MonoBehaviour
     private int indiceArma = 0;
     private PlayerMouse playerMouse;
     private AudioSource audioSource;
-
 
     void Start()
     {
@@ -52,13 +49,15 @@ public class Disparo : MonoBehaviour
 
     public void OnDisparar(InputValue valor)
     {
-        if (puedoDisparar)
+        if (puedoDisparar && GameManager.Instance.ammo > 0)
         {
+            GameManager.Instance.ammo--;
             puedoDisparar = false;
             audioSource.Play();
-            GameObject bala = Instantiate(balas[indiceArma], puntoDisparo[indiceArma].position,
-                puntoDisparo[indiceArma].rotation);
-            bala.GetComponent<Rigidbody>().AddForce(puntoDisparo[indiceArma].forward * fuerzaDisparo[indiceArma]);
+            GameObject bala = Instantiate(balas[indiceArma], puntoDisparo[indiceArma].position, puntoDisparo[indiceArma].rotation);
+            bala.transform.rotation = Quaternion.Euler(90f, puntoDisparo[indiceArma].rotation.eulerAngles.y, puntoDisparo[indiceArma].rotation.eulerAngles.z);
+            Vector3 direccionDisparo = puntoDisparo[indiceArma].forward;
+            bala.GetComponent<Rigidbody>().AddForce(direccionDisparo * fuerzaDisparo[indiceArma], ForceMode.Impulse);
             StartCoroutine(EsperaDisparo());
         }
     }
