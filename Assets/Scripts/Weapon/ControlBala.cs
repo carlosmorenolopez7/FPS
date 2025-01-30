@@ -13,6 +13,7 @@ public class ControlBala : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        print(other.gameObject.name);
         if (other.gameObject.CompareTag("enemy"))
         {
             audioSource.Play();
