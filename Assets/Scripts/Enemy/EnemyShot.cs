@@ -6,11 +6,13 @@ public class EnemyShot : MonoBehaviour
     public Transform bulletPoint;
     private Transform playerPosition;
     public float bulletForce = 100;
+    public AudioClip audioClip;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioClip = GetComponent<AudioClip>();
         playerPosition = FindObjectOfType<PlayerMove>().transform;
         Invoke("ShootPlayer",3);
     }
@@ -23,6 +25,7 @@ public class EnemyShot : MonoBehaviour
 
     void ShootPlayer()
     {
+        GetComponent<AudioSource>().Play();
         Vector3 playerDirection = playerPosition.position - transform.position;
         GameObject newBullet;
         newBullet = Instantiate(enemyBullet, bulletPoint.position, bulletPoint.rotation);
