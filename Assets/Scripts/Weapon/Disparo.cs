@@ -12,7 +12,6 @@ public class Disparo : MonoBehaviour
     public Transform[] puntoDisparo;
     public GameObject[] balas;
     public AudioClip[] audio;
-
     private int indiceArma = 0;
     private PlayerMouse playerMouse;
     private AudioSource audioSource;
@@ -32,7 +31,6 @@ public class Disparo : MonoBehaviour
         }
 
         armas[indiceArma].SetActive(true);
-        audioSource.clip = audio[indiceArma];
     }
 
     public GameObject GetArma()
