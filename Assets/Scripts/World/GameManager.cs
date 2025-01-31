@@ -20,4 +20,9 @@ public class GameManager : MonoBehaviour
         ammoText.text = ammo.ToString();
         healthText.text = health.ToString();
     }
+
+    public void LoseHealth(int damage)
+    {
+        health -= damage;
+    }
 }

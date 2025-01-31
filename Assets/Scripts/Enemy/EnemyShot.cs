@@ -12,6 +12,7 @@ public class EnemyShot : MonoBehaviour
     void Start()
     {
         playerPosition = FindObjectOfType<PlayerMove>().transform;
+        Invoke("ShootPlayer",3);
     }
 
     // Update is called once per frame
@@ -20,10 +21,12 @@ public class EnemyShot : MonoBehaviour
         
     }
 
-    void Shoot()
+    void ShootPlayer()
     {
         Vector3 playerDirection = playerPosition.position - transform.position;
         GameObject newBullet;
         newBullet = Instantiate(enemyBullet, bulletPoint.position, bulletPoint.rotation);
+        newBullet.GetComponent<Rigidbody>().AddForce(playerDirection * bulletForce, ForceMode.Impulse);
+        Invoke("ShootPlayer", 3);
     }
 }

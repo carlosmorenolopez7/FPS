@@ -2851,7 +2851,7 @@ GameObject:
   - component: {fileID: 1544025351}
   m_Layer: 0
   m_Name: Slayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3283,7 +3283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 35.8, y: 30.1}
+  m_AnchoredPosition: {x: 35.80005, y: 30.099976}
   m_SizeDelta: {x: 72.44452, y: 46.0569}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668455986
@@ -3862,6 +3862,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyRanged
       objectReference: {fileID: 0}
+    - target: {fileID: 3916439214920173606, guid: ebd845240f5daec4f8ae61fce7cf0777, type: 3}
+      propertyPath: bulletForce
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7626475042306980486, guid: ebd845240f5daec4f8ae61fce7cf0777, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3915,17 +3919,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6078083232396903001, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6078083232396903001, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6078083232396903001, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
+    - target: {fileID: 1609756060448154298, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
+      propertyPath: bulletForce
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6954870006798086254, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
       propertyPath: m_Name

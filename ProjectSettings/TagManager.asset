@@ -6,6 +6,7 @@ TagManager:
   tags:
   - enemy
   - AmmoBox
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
