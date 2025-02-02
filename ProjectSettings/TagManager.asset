@@ -8,6 +8,7 @@ TagManager:
   - AmmoBox
   - EnemyBullet
   - Bala
+  - HealthContainer
   layers:
   - Default
   - TransparentFX

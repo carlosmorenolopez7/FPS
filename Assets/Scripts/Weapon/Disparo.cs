@@ -4,33 +4,36 @@ using System.Collections;
 
 public class Disparo : MonoBehaviour
 {
-    private bool puedoDisparar = true;
-
-    public float[] fuerzaDisparo;
-    public float[] tiempoDisparo;
     public GameObject[] armas;
     public Transform[] puntoDisparo;
-    public GameObject[] balas;
-    public AudioClip[] audio;
+    public float[] fuerzaDisparo;
+    public float[] tiempoDisparo;
+    public float[] damage;
+    public int[] municionPorDisparo;
     private int indiceArma = 0;
-    private PlayerMouse playerMouse;
+    private bool puedoDisparar = true;
     private AudioSource audioSource;
+    public Animator animator;
+    public Camera fpsCam;
+    public ParticleSystem[] muzzleFlashes;
+    public GameObject impactEffect;
+    public float range = 100f;
+    public float impactForce = 30f;
+    public AudioClip[] audioClips;
 
     void Start()
     {
-        playerMouse = FindObjectOfType<PlayerMouse>();
         audioSource = GetComponent<AudioSource>();
-        CambiarArmas(0);
+        animator = GetComponent<Animator>();
     }
 
-    private void CambiarArmas(int indiceArma)
+    void CambiarArmas(int indice)
     {
         for (int i = 0; i < armas.Length; i++)
         {
             armas[i].SetActive(false);
         }
-
-        armas[indiceArma].SetActive(true);
+        armas[indice].SetActive(true);
     }
 
     public GameObject GetArma()
@@ -43,19 +46,47 @@ public class Disparo : MonoBehaviour
         if (++indiceArma >= armas.Length)
             indiceArma = 0;
         CambiarArmas(indiceArma);
+        animator.SetTrigger("CambioArma");
     }
 
     public void OnDisparar(InputValue valor)
     {
-        if (puedoDisparar && GameManager.Instance.ammo > 0)
+        if (puedoDisparar && GameManager.Instance.ammo >= municionPorDisparo[indiceArma])
         {
-            GameManager.Instance.ammo--;
+            GameManager.Instance.ammo -= municionPorDisparo[indiceArma];
             puedoDisparar = false;
-            audioSource.Play();
-            GameObject bala = Instantiate(balas[indiceArma], puntoDisparo[indiceArma].position, puntoDisparo[indiceArma].rotation);
-            bala.transform.rotation = Quaternion.Euler(90f, puntoDisparo[indiceArma].rotation.eulerAngles.y, puntoDisparo[indiceArma].rotation.eulerAngles.z);
-            Vector3 direccionDisparo = puntoDisparo[indiceArma].forward;
-            bala.GetComponent<Rigidbody>().AddForce(direccionDisparo * fuerzaDisparo[indiceArma], ForceMode.Impulse);
+            audioSource.PlayOneShot(audioClips[indiceArma]);
+
+            if (muzzleFlashes[indiceArma] != null)
+            {
+                muzzleFlashes[indiceArma].Play();
+            }
+
+            RaycastHit hit;
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+            {
+                Debug.Log("Impacto en: " + hit.transform.name);
+                if (hit.transform.CompareTag("enemy"))
+                {
+                    EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+                    if (enemyHealth != null)
+                    {
+                        enemyHealth.TakeDamage((int)damage[indiceArma]);
+                        Debug.Log("Daño aplicado al enemigo: " + hit.transform.name);
+                    }
+                }
+
+                if (impactEffect != null)
+                {
+                    GameObject impactItem = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(impactItem, 2f);
+                }
+
+                if (hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * impactForce);
+                }
+            }
             StartCoroutine(EsperaDisparo());
         }
     }
