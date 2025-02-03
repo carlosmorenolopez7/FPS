@@ -21,7 +21,6 @@ public class PlayerMouse : MonoBehaviour
 
     public void CambiarArma(Transform arma)
     {
-        Cursor.lockState = CursorLockMode.Locked;
         cuerpoJugador = arma;
     }
 

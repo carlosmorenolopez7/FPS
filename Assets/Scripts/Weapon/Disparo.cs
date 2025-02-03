@@ -5,7 +5,6 @@ using System.Collections;
 public class Disparo : MonoBehaviour
 {
     public GameObject[] armas;
-    public Transform[] puntoDisparo;
     public float[] fuerzaDisparo;
     public float[] tiempoDisparo;
     public float[] damage;
@@ -17,8 +16,8 @@ public class Disparo : MonoBehaviour
     public Camera fpsCam;
     public ParticleSystem[] muzzleFlashes;
     public GameObject impactEffect;
-    public float range = 100f;
-    public float impactForce = 30f;
+    public float range = 100;
+    public float impactForce = 30;
     public AudioClip[] audioClips;
 
     void Start()
@@ -63,6 +62,7 @@ public class Disparo : MonoBehaviour
             }
 
             RaycastHit hit;
+            Debug.DrawRay(fpsCam.transform.position, fpsCam.transform.forward * range, Color.red, 2f);
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
             {
                 Debug.Log("Impacto en: " + hit.transform.name);
