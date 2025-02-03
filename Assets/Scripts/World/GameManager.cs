@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public int ammo = 10;
     public int health = 100;
     public Image gameOverImage;
-    public float gameOverDelay = 5f;
+    public float gameOverDelay = 3f;
 
     private void Awake()
     {

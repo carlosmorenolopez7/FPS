@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 3916439214920173606}
   - component: {fileID: 3264041490909956014}
   - component: {fileID: 3116045611042886970}
+  - component: {fileID: 7411807652222577173}
   m_Layer: 0
   m_Name: PA_Drone
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +77,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -122,6 +123,15 @@ MonoBehaviour:
   bulletPoint: {fileID: 4784179331829205651}
   bulletForce: 2
   audioClip: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
+  path: {fileID: 0}
+  visionAngle: 45
+  visionDistance: 10
+  player: {fileID: 0}
+  distanceThreshold: 2
+  searchSpeedMultiplier: 2.5
+  searchRadius: 20
+  waypointWaitTime: 3
+  minDistanceFromWall: 5
 --- !u!114 &3264041490909956014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vida: 50
+  explosionPrefab: {fileID: 100006, guid: 2e7e92bc7175b744ea40878dedfa79e4, type: 3}
+  explosionDelay: 0.5
 --- !u!82 &3116045611042886970
 AudioSource:
   m_ObjectHideFlags: 0
@@ -232,6 +244,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7411807652222577173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803887907789253284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b98880adb5a704b9c037a11a1a694d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionAngle: 60
+  visionDistance: 10
+  player: {fileID: 0}
+  speed: 20
 --- !u!1 &2472673030375057637
 GameObject:
   m_ObjectHideFlags: 0
