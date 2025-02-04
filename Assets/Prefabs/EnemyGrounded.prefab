@@ -885,7 +885,7 @@ MonoBehaviour:
   shootingDelay: 0.5
   visionAngle: 60
   visionDistance: 20
-  circularDetectionRadius: 10
+  circularDetectionRadius: 15
   player: {fileID: 0}
   path: {fileID: 0}
   distanceThreshold: 2

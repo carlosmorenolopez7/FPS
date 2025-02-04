@@ -53,7 +53,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 66dc782a7467fa14bba043cda149053d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -104,7 +104,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.7
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3916439214920173606
@@ -126,7 +126,7 @@ MonoBehaviour:
   shootingDelay: 0.5
   visionAngle: 60
   visionDistance: 20
-  circularDetectionRadius: 10
+  circularDetectionRadius: 15
   player: {fileID: 0}
   path: {fileID: 0}
   distanceThreshold: 2
