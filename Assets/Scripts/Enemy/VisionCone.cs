@@ -35,7 +35,7 @@ public class VisionCone : MonoBehaviour
                 if (hit.transform == player)
                 {
                     spotLight.color = Color.red;
-                    ChasePlayer(directionToPlayer);
+                    transform.LookAt(player);
                 }
                 else
                 {
@@ -51,13 +51,6 @@ public class VisionCone : MonoBehaviour
         {
             spotLight.color = Color.yellow;
         }
-    }
-
-    private void ChasePlayer(Vector3 direction)
-    {
-        Vector3 moveDirection = direction.normalized;
-        transform.position += moveDirection * speed * Time.deltaTime;
-        transform.LookAt(player);
     }
 
     private void OnDrawGizmos()

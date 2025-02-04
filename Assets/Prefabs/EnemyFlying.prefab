@@ -121,17 +121,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBullet: {fileID: 6375803730585195887, guid: 172769b0c84e0ed4f899217ad8a6b476, type: 3}
   bulletPoint: {fileID: 4784179331829205651}
-  bulletForce: 2
+  bulletForce: 30
   audioClip: {fileID: 8300000, guid: 92d35fe1c59bbd14eaee9e3d3b54cea7, type: 3}
-  path: {fileID: 0}
-  visionAngle: 45
-  visionDistance: 10
+  shootingDelay: 0.5
+  visionAngle: 60
+  visionDistance: 20
+  circularDetectionRadius: 10
   player: {fileID: 0}
+  path: {fileID: 0}
   distanceThreshold: 2
-  searchSpeedMultiplier: 2.5
-  searchRadius: 20
-  waypointWaitTime: 3
-  minDistanceFromWall: 5
 --- !u!114 &3264041490909956014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionAngle: 60
-  visionDistance: 10
+  visionDistance: 20
   player: {fileID: 0}
   speed: 20
 --- !u!1 &2472673030375057637

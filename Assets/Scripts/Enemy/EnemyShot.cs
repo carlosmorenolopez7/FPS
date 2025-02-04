@@ -7,52 +7,49 @@ public class EnemyShot : MonoBehaviour
     public GameObject enemyBullet;
     public Transform bulletPoint;
     private Transform playerPosition;
-    public float bulletForce = 100;
-    ///
+    public float bulletForce = 100f;
     public AudioClip audioClip;
-    public Transform path;
-    public float visionAngle = 45f;
-    public float visionDistance = 10f;
+    public float shootingDelay = 0.5f;
+    public float visionAngle = 60f;
+    public float visionDistance = 20f;
+    public float circularDetectionRadius = 10f;
     public Transform player;
+    public Transform path;
     public float distanceThreshold = 2f;
-    public float searchSpeedMultiplier = 2.5f;
-    public float searchRadius = 20f;
-    public float waypointWaitTime = 3f;
-    public float minDistanceFromWall = 5f;
-
     private UnityEngine.AI.NavMeshAgent agent;
     private Transform[] waypoints;
     private int childrenIndex = 0;
-    private bool isChasingPlayer = false;
-    private Vector3[] searchWaypoints;
+    private bool playerInSight = false;
 
     void Start()
     {
-        audioClip = GetComponent<AudioClip>();
         playerPosition = FindObjectOfType<PlayerMove>().transform;
-        Invoke("ShootPlayer",3);
-
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         waypoints = new Transform[path.childCount];
+        
         for (int i = 0; i < path.childCount; i++)
         {
             waypoints[i] = path.GetChild(i);
         }
 
         SetDestinationToNextWaypoint();
+        InvokeRepeating("TryShootPlayer", shootingDelay, shootingDelay);
     }
 
     void Update()
     {
-        if (isChasingPlayer)
-        {
-            ChasePlayer();
-        }
-        else
+        DetectPlayer();
+        FollowPlayerWithEyes();
+
+        if (!playerInSight)
         {
             MoveAlongPath();
-            DetectPlayer();
         }
+    }
+
+    private void SetDestinationToNextWaypoint()
+    {
+        agent.SetDestination(waypoints[childrenIndex].position);
     }
 
     private void MoveAlongPath()
@@ -64,16 +61,10 @@ public class EnemyShot : MonoBehaviour
         }
     }
 
-    private void SetDestinationToNextWaypoint()
-    {
-        agent.SetDestination(waypoints[childrenIndex].position);
-    }
-
     private void DetectPlayer()
     {
         Vector3 directionToPlayer = player.position - transform.position;
         float angle = Vector3.Angle(directionToPlayer, transform.forward);
-
         if (angle < visionAngle / 2f && Vector3.Distance(transform.position, player.position) < visionDistance)
         {
             RaycastHit hit;
@@ -81,22 +72,42 @@ public class EnemyShot : MonoBehaviour
             {
                 if (hit.transform == player)
                 {
-                    isChasingPlayer = true;
+                    playerInSight = true;
+                    Debug.Log("Jugador detectado (cono de visión)");
+                }
+                else
+                {
+                    playerInSight = false;
                 }
             }
         }
+        else
+        {
+            playerInSight = false;
+        }
+
+        if (!playerInSight && Vector3.Distance(transform.position, player.position) < circularDetectionRadius)
+        {
+            playerInSight = true;
+            Debug.Log("Jugador detectado (circular)");
+        }
     }
 
-    private void ChasePlayer()
+    private void FollowPlayerWithEyes()
     {
-        agent.SetDestination(player.position);
-        Vector3 directionToPlayer = player.position - transform.position;
-        float angle = Vector3.Angle(directionToPlayer, transform.forward);
-
-        if (angle > visionAngle / 2f || Vector3.Distance(transform.position, player.position) > visionDistance)
+        if (playerInSight)
         {
-            isChasingPlayer = false;
-            SetDestinationToNextWaypoint();
+            Vector3 directionToPlayer = player.position - transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+    }
+
+    void TryShootPlayer()
+    {
+        if (playerInSight)
+        {
+            ShootPlayer();
         }
     }
 
@@ -104,33 +115,7 @@ public class EnemyShot : MonoBehaviour
     {
         GetComponent<AudioSource>().Play();
         Vector3 playerDirection = playerPosition.position - transform.position;
-        GameObject newBullet;
-        newBullet = Instantiate(enemyBullet, bulletPoint.position, bulletPoint.rotation);
-        newBullet.GetComponent<Rigidbody>().AddForce(playerDirection * bulletForce, ForceMode.Impulse);
-        Invoke("ShootPlayer", 3);
+        GameObject newBullet = Instantiate(enemyBullet, bulletPoint.position, bulletPoint.rotation);
+        newBullet.GetComponent<Rigidbody>().AddForce(playerDirection.normalized * bulletForce, ForceMode.Impulse);
     }
-
-    /*    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        audioClip = GetComponent<AudioClip>();
-        playerPosition = FindObjectOfType<PlayerMove>().transform;
-        Invoke("ShootPlayer",3);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void ShootPlayer()
-    {
-        GetComponent<AudioSource>().Play();
-        Vector3 playerDirection = playerPosition.position - transform.position;
-        GameObject newBullet;
-        newBullet = Instantiate(enemyBullet, bulletPoint.position, bulletPoint.rotation);
-        newBullet.GetComponent<Rigidbody>().AddForce(playerDirection * bulletForce, ForceMode.Impulse);
-        Invoke("ShootPlayer", 3);
-    }*/
 }

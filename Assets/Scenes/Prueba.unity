@@ -2864,9 +2864,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3264041490909956014, guid: ebd845240f5daec4f8ae61fce7cf0777, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3488679071533615387, guid: ebd845240f5daec4f8ae61fce7cf0777, type: 3}
       propertyPath: m_Name
       value: EnemyFlying
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916439214920173606, guid: ebd845240f5daec4f8ae61fce7cf0777, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411807652222577173, guid: ebd845240f5daec4f8ae61fce7cf0777, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7626475042306980486, guid: ebd845240f5daec4f8ae61fce7cf0777, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2921,6 +2933,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1095539518351606826, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609756060448154298, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171786516252671653, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6954870006798086254, guid: a891ed9f86d310947b0505bfdd5f1c23, type: 3}
       propertyPath: m_Name
       value: EnemyGrounded
