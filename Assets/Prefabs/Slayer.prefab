@@ -15255,7 +15255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd8e0fa6524a0b44b7224e37d2ae9bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 30
+  sensitivity: 25
   cuerpoJugador: {fileID: 9142278641387364016}
 --- !u!114 &5616909187708227407
 MonoBehaviour:
@@ -15420,6 +15420,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b45ecb328dcf6e4aa81d9bf891a6472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonidoRecogidaMunicion: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
+  sonidoRecogidaVida: {fileID: 8300000, guid: cfce0cea076109f478783201b2a9f57f, type: 3}
+  sonidoRecogidaLlave: {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
 --- !u!95 &5120201558377912039
 Animator:
   serializedVersion: 7
