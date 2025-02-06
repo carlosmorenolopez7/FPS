@@ -20,6 +20,8 @@ public class BossController : MonoBehaviour
     private int childrenIndex = 0;
     private bool playerInSight = false;
     private Animator animator;
+    private AudioSource audioSource;
+    public float shootVolume = 0.2f;
 
     void Start()
     {
@@ -34,16 +36,20 @@ public class BossController : MonoBehaviour
             waypoints[i] = path.GetChild(i);
         }
 
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource != null)
+        {
+            audioSource.volume = shootVolume;
+        }
+
         SetDestinationToNextWaypoint();
-        InvokeRepeating("TryShootPlayer", shootingDelay, shootingDelay); // Intentar disparar a intervalos
+        InvokeRepeating("TryShootPlayer", shootingDelay, shootingDelay);
     }
 
     void Update()
     {
         DetectPlayer();
         FollowPlayerWithEyes();
-
-        // Movimiento continuo entre waypoints, siempre
         MoveAlongPath();
     }
 
@@ -54,7 +60,6 @@ public class BossController : MonoBehaviour
 
     private void MoveAlongPath()
     {
-        // Mover al siguiente waypoint solo cuando llegue al actual
         if (Vector3.Distance(transform.position, waypoints[childrenIndex].position) < distanceThreshold)
         {
             childrenIndex = (childrenIndex + 1) % waypoints.Length;
@@ -110,11 +115,11 @@ public class BossController : MonoBehaviour
         {
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shooting"))
             {
-                ShootFromBulletPoints(shootingBulletPoints); // Disparar desde puntos de Shooting
+                ShootFromBulletPoints(shootingBulletPoints);
             }
             else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Static"))
             {
-                ShootFromBulletPoints(staticBulletPoints); // Disparar desde puntos de Static
+                ShootFromBulletPoints(staticBulletPoints);
             }
         }
     }
@@ -129,9 +134,17 @@ public class BossController : MonoBehaviour
 
     void Shoot(Transform bulletPoint)
     {
-        GetComponent<AudioSource>().PlayOneShot(audioClip); // Reproducir sonido de disparo
+        GetComponent<AudioSource>().PlayOneShot(audioClip);
         Vector3 playerDirection = player.position - bulletPoint.position;
         GameObject newBullet = Instantiate(enemyBullet, bulletPoint.position, bulletPoint.rotation);
         newBullet.GetComponent<Rigidbody>().AddForce(playerDirection.normalized * bulletForce, ForceMode.Impulse);
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ActivateObjectAfterDelay();
+        }
     }
 }

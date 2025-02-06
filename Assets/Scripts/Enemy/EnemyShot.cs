@@ -20,6 +20,8 @@ public class EnemyShot : MonoBehaviour
     private Transform[] waypoints;
     private int childrenIndex = 0;
     private bool playerInSight = false;
+    private AudioSource audioSource;
+    public float shootVolume = 0.5f;
 
     void Start()
     {
@@ -30,6 +32,12 @@ public class EnemyShot : MonoBehaviour
         for (int i = 0; i < path.childCount; i++)
         {
             waypoints[i] = path.GetChild(i);
+        }
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource != null)
+        {
+            audioSource.volume = shootVolume;
         }
 
         SetDestinationToNextWaypoint();
@@ -73,7 +81,7 @@ public class EnemyShot : MonoBehaviour
                 if (hit.transform == player)
                 {
                     playerInSight = true;
-                    Debug.Log("Jugador detectado (cono de visión)");
+                    //Debug.Log("Jugador detectado (cono de visión)");
                 }
                 else
                 {
@@ -89,7 +97,7 @@ public class EnemyShot : MonoBehaviour
         if (!playerInSight && Vector3.Distance(transform.position, player.position) < circularDetectionRadius)
         {
             playerInSight = true;
-            Debug.Log("Jugador detectado (circular)");
+            //Debug.Log("Jugador detectado (circular)");
         }
     }
 
@@ -113,7 +121,10 @@ public class EnemyShot : MonoBehaviour
 
     void ShootPlayer()
     {
-        GetComponent<AudioSource>().Play();
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
         Vector3 playerDirection = playerPosition.position - transform.position;
         GameObject newBullet = Instantiate(enemyBullet, bulletPoint.position, bulletPoint.rotation);
         newBullet.GetComponent<Rigidbody>().AddForce(playerDirection.normalized * bulletForce, ForceMode.Impulse);
