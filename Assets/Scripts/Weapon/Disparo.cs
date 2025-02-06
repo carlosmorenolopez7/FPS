@@ -75,6 +75,11 @@ public class Disparo : MonoBehaviour
                         Debug.Log("Daño aplicado al enemigo: " + hit.transform.name);
                     }
                 }
+                else if (hit.transform.CompareTag("secreto"))
+                {
+                    Destroy(hit.transform.gameObject);
+                    Debug.Log("Pared secreta destruida: " + hit.transform.name);
+                }
 
                 if (impactEffect != null)
                 {

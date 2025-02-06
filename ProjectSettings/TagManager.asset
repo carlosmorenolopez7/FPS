@@ -10,6 +10,8 @@ TagManager:
   - Bala
   - HealthContainer
   - llave
+  - FxTemporaire
+  - secreto
   layers:
   - Default
   - TransparentFX
