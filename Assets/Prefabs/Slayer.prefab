@@ -15283,16 +15283,16 @@ MonoBehaviour:
   - 50
   tiempoDisparo:
   - 0
-  - 0.5
+  - 0.3
   - 0
-  - 0.8
+  - 0.3
   - 1
   damage:
   - 10
-  - 20
-  - 15
   - 30
-  - 50
+  - 15
+  - 40
+  - 60
   municionPorDisparo: 0100000002000000010000000300000005000000
   animator: {fileID: 5120201558377912039}
   fpsCam: {fileID: 7588283261045642980}
